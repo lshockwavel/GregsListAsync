@@ -13,7 +13,10 @@ export class House {
      * levels: number,
      * createdAt: Date,
      * updatedAt: Date,
-     * creator: string
+     * creator: {
+     *  name: string,
+     *  id: string
+     * }
      * }} data
      */
     constructor(data) {
@@ -49,7 +52,7 @@ export class House {
                         <p class="card-text"><small class="text-muted">Creator: ${this.creator.name}</small></p>
                     </div>
                     <button class="btn btn-danger" onclick="app.HouseController.deleteHouse('${this.id}')">Delete</button>
-                    <button class="btn btn-primary" onclick="app.HouseController.drawActiveHouse('${this.House}')">Edit</button>
+                    <button class="btn btn-primary" onclick="app.HouseController.setActiveHouse('${this.id}')">Edit</button>
                 </div>
             </div>
         </div>

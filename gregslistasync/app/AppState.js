@@ -14,6 +14,9 @@ class ObservableAppState extends EventEmitter {
   /** @type {Job[]} */
   jobs = [];
 
+  /** @type {Job | null} */
+  activeJob = null;
+
   user = null
   /**@type {import('./models/Account.js').Account | null} */
   account = null

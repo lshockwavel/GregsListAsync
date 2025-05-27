@@ -45,7 +45,22 @@ export class HouseController {
         setHTML('house-form', House.HouseCreateCard());
     }
 
-    drawActiveHouse(house) {
+    setActiveHouse(houseId)
+    {
+        console.log('Setting active house', houseId);
+
+        houseService.setActiveHouse(houseId);
+    }
+
+    drawActiveHouse() {
+        const house = AppState.activeHouse;
+        if (!house) {
+            console.log('No active house to draw');
+            setHTML('house-form', '<p>No active house selected.</p>');
+            return;
+        }
+
+        // console.log('Drawing active house', house);
         console.log('Drawing edit house form for', house);
         setHTML('house-form', House.HouseEditCard(house));
     }
@@ -58,8 +73,8 @@ export class HouseController {
         try {
             event.preventDefault();
             const form = event.target;
-            console.log(form);
-            console.log(form.description.value);
+            console.log("form Data:", form);
+            console.log("form Value:",form.description.value);
 
             const houseData = getFormData(form);
             // const houseData = {
@@ -87,15 +102,15 @@ export class HouseController {
         }
     }
 
-    drawActiveHouse() {
-        console.log('Drawing active house');
-        const activeHouse = AppState.activeHouse;
-        if (!activeHouse) {
-            setHTML('active-house', '<p>No active house selected.</p>');
-            return;
-        }
-        setHTML('active-house', activeHouse.HouseCard);
-    }
+    // drawActiveHouse() {
+    //     console.log('Drawing active house');
+    //     const activeHouse = AppState.activeHouse;
+    //     if (!activeHouse) {
+    //         setHTML('active-house', '<p>No active house selected.</p>');
+    //         return;
+    //     }
+    //     setHTML('active-house', activeHouse.HouseCard);
+    // }
 
 
     /* 🚮 */
@@ -119,10 +134,40 @@ export class HouseController {
         
     }
 
-    async editHouse(houseData) {
-        console.log('Editing house', houseData);
-        // Implement the logic to edit the house
+    async editHouse(event, houseId) {
+        console.log('Editing house', houseId);
 
+        try {
+            event.preventDefault();
+            const form = event.target;
+            console.log(form);
+            console.log(form.description.value);
 
+            const houseData = getFormData(form);
+            // const houseData = {
+            //     id: houseId,
+            //     bedrooms: form.bedrooms.value,
+            //     bathrooms: form.bathrooms.value,
+            //     year: form.year.value,
+            //     price: form.price.value,
+            //     imgUrl: form.imgUrl.value,
+            //     description: form.description.value,
+            //     sqft: form.sqft.value,
+            //     address: form.address.value
+            // };
+            await houseService.editHouse(houseData, houseId);
+            console.log('house data', houseData);
+
+            // Reset the form after submission
+            form.reset();
+
+            this.drawCreateHouseForm();
+
+        } catch (error) {
+            console.error('Error editing house:', error);
+            // Optionally, you can show an error message to the user
+            alert('Failed to edit house. Please try again.');
+            console.error(error);
+        }
     }
 }

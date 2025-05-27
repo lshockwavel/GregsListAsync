@@ -10,7 +10,7 @@ class HouseService {
     console.log('Created house:', house.data);
 
     const newHouse = new House(house.data);
-    AppState.houses.push(newHouse); //Add to the front of the array
+    AppState.houses.unshift(newHouse); //Add to the front of the array
   }
 
   async getHouses() {
@@ -19,6 +19,34 @@ class HouseService {
     const houses = response.data.map(h => new House(h));
     AppState.houses = houses; // Update the AppState with the fetched houses
     console.log(houses);
+  }
+
+  async editHouse(houseData, houseId) {
+    const response = await api.put(`api/houses/${houseId}`, houseData);
+    console.log('Edited house:', response.data);
+
+    // Find the index of the house in AppState
+    const index = AppState.houses.findIndex(h => h.id === houseId);
+    if (index !== -1) {
+      // Update the house in AppState
+      AppState.houses[index] = new House(response.data);
+
+      AppState.activeHouse = null; // Clear the active house after editing
+
+      AppState.emit('houses'); // Emit an event to notify listeners
+    } else {
+      console.error('House not found in AppState:', houseId);
+    }
+  }
+
+  setActiveHouse(houseId) {
+    const house = AppState.houses.find(h => h.id === houseId);
+    if (!house) {
+      console.error('House not found:', houseId);
+      return;
+    }
+    AppState.activeHouse = house; // Set the active house in AppState
+    console.log('Active house set to:', house);
   }
 
   // /* 💾 */
