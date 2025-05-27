@@ -40,13 +40,108 @@
 
   <!-- SECTION -->
   <main>
-    
+          <h1 class="text-center">Welcome to gregslist</h1> <!-- REVIEW Will this break the container/row/col rule? -->
+      <section class="row">
+        <div class="col-12">
+          <h2>Houses for Sale</h2>
+          <hr />
+        </div>
+        <section id="house-form" class= "d-none">
+        </section>
+        <!-- <form onsubmit="app.HouseController.createHouse(event)">
+          <div class="col-12 bg-white rounded p-3 mb-3">
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <label for="house-bedrooms">Bedroom</label>
+                <input minlength="0" maxlength="99" type="number" name="bedrooms" id="house-bedrooms" placeholder="Bedrooms" class="form-control">
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="house-bathrooms">Bathroom</label>
+                <input minlength="0" maxlength="99" type="number" step=".5" name="bathrooms" id="house-bathrooms" placeholder="Bathrooms" class="form-control">
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="house-Price">Price</label>
+                <input min="1" max="999999999" type="number" name="price" id="house-price" placeholder="Price" class="form-control" required>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="house-year">Year</label>
+                <input type="number" min="1886" max="2025" name="year" id="house-year" placeholder="Year" class="form-control" value="2025" required>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="house-levels">Levels</label>
+                <input type="number" min="1" name="levels" id="house-levels" step="1" placeholder="Levels" class="form-control" required>
+              </div>
+              <div class="col-md-12 mb-2">
+                <label for="house-imgUrl">URL for picture</label>
+                <input type="text" name="imgUrl" id="house-imgUrl" placeholder="Image URL" class="form-control" >
+              </div>
+              <div class="col-12 mb-2">
+                <label for="house-description">Description</label>
+                <textarea name="description" id="house-description" placeholder="Description" class="form-control" rows="4"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary mb-3 shadow rounded-pill">
+                Create House
+              </button>
+            </div>
+          </div>
+        </form> -->
+        <div class="col-12">
+          <div id="house-listings" class="row"></div>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-12">
+          <h2>Job Market</h2>
+          <hr />
+        </div>
+        <form onsubmit="app.JobController.createJob(event)">
+          <div class="col-12 bg-white rounded p-3 mb-3">
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <label for="job-company">Company</label>
+                <input type="text" name="company" id="job-company" placeholder="Company Name" class="form-control" required>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="job-title">Job Title</label>
+                <input type="text" name="title" id="job-title" placeholder="Job Title" class="form-control" required>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="job-rate">Salary</label>
+                <input type="number" name="rate" id="job-rate" placeholder="Salary (e.g., 50000)" class="form-control" required>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="job-hours">Hours/Week</label>
+                <input type="number" name="hours" id="job-hours" placeholder="Hours per Week" class="form-control" required>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="job-location">Location</label>
+                <input type="text" name="location" id="job-location" placeholder="Location" class="form-control" required>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="job-imgIconUrl">Company Logo URL</label>
+                <input type="text" name="imgIconUrl" id="job-imgIconUrl" placeholder="Logo Image URL" class="form-control">
+              </div>
+              <div class="col-12 mb-2">
+                <label for="job-description">Description</label>
+                <textarea name="description" id="job-description" placeholder="Job Description" class="form-control" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-success mb-3 shadow rounded-pill" style="background: linear-gradient(45deg, #198754, #20c997); border: none;">
+                Create Job
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="col-12">
+          <div id="job-listings" class="row"></div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <!-- SECTION -->
   <footer class="bg-dark text-light">
     <div class="text-center no-select">
-      <p class="mb-0"><small>Made with 💖 by CodeWorks</small></p>
+      <p class="mb-0"><small>Made with 🤞 by Dane</small></p>
     </div>
   </footer>
 
