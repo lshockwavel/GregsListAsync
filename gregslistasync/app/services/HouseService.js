@@ -39,9 +39,25 @@ class HouseService {
   // }
 
   /* 🚮 */
-  deleteHouse(id) {
-    AppState.houses = AppState.houses.filter(h => h.id !== id);
-    this.saveHouse(); // Save to local storage
+  async deleteHouse(id) {
+    const response = await api.delete(`api/houses/${id}`);
+    console.log('Deleted house:', response.data);
+    // Remove the house from AppState
+    const houseToDelete = AppState.houses.find(h => h.id === id);
+    if (!houseToDelete) {
+      console.error('House not found:', id);
+      return;
+    }
+    // Remove the house from the AppState
+    console.log('Removing house:', houseToDelete);
+
+    const index = AppState.houses.indexOf(houseToDelete);
+    if (index > -1) {
+      AppState.houses.splice(index, 1); // Remove the house from the array
+    }
+
+    // AppState.houses = AppState.houses.filter(h => h.id !== id);
+    // this.saveHouse(); // Save to local storage
   }
 }
 

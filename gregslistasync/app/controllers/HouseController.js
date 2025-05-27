@@ -3,6 +3,7 @@ import { houseService } from "../services/HouseService.js";
 import { setHTML } from "../utils/Writer.js";
 import { getFormData } from "../utils/FormHandler.js";
 import { House } from "../models/House.js";
+import { Pop } from "../utils/Pop.js";
 
 
 export class HouseController {
@@ -43,6 +44,13 @@ export class HouseController {
         console.log('Drawing create house form');
         setHTML('house-form', House.HouseCreateCard());
     }
+
+    drawActiveHouse(house) {
+        console.log('Drawing edit house form for', house);
+        setHTML('house-form', House.HouseEditCard(house));
+    }
+
+
 
     /* 👷 */
     async createHouse(event) {
@@ -91,16 +99,27 @@ export class HouseController {
 
 
     /* 🚮 */
-    deleteHouse(id) {
-        // Creating a user confirmation before deleting the house
-        console.log('Deleting house', id);
-        const confirmDelete = confirm('Are you sure you want to delete this house?');
-        if (confirmDelete) {
-            houseService.deleteHouse(id);
+    async deleteHouse(id) {
+
+        try {
+            // Creating a user confirmation before deleting the house
+            console.log('Deleting house', id);
+            // const confirmDelete = confirm('Are you sure you want to delete this house?');
+            const confirmDelete = await Pop.confirm('Are you sure you want to delete this house?');
+            console.log('Confirm delete:', confirmDelete);
+            if (confirmDelete) {
+                await houseService.deleteHouse(id);
+            }
         }
+        catch (error) {
+            console.error('Error deleting house:', error);
+            // Optionally, you can show an error message to the user
+            Pop.error('Failed to delete house. Please try again.');
+        }
+        
     }
 
-    editHouse(houseData) {
+    async editHouse(houseData) {
         console.log('Editing house', houseData);
         // Implement the logic to edit the house
 

@@ -49,7 +49,7 @@ export class House {
                         <p class="card-text"><small class="text-muted">Creator: ${this.creator.name}</small></p>
                     </div>
                     <button class="btn btn-danger" onclick="app.HouseController.deleteHouse('${this.id}')">Delete</button>
-                    <button class="btn btn-primary" onclick="app.HouseController.editHouse('${this.House}')">Edit</button>
+                    <button class="btn btn-primary" onclick="app.HouseController.drawActiveHouse('${this.House}')">Edit</button>
                 </div>
             </div>
         </div>
@@ -106,30 +106,30 @@ export class House {
         `
     }
 
-    static HouseEditCard() {
+    static HouseEditCard(house) {
         return /*html*/ `
-        <form onsubmit="app.HouseController.editHouse(event, '${this.id}')">
+        <form onsubmit="app.HouseController.editHouse(event, '${house.id}')">
           <div class="col-12 bg-white rounded p-3 mb-3">
             <div class="row">
               <div class="col-md-4 mb-2">
                 <label for="house-bedrooms">Bedroom</label>
-                <input minlength="0" maxlength="99" type="number" name="bedrooms" id="house-bedrooms" placeholder="Bedrooms" class="form-control" value="${this.bedrooms}">
+                <input minlength="0" maxlength="99" type="number" name="bedrooms" id="house-bedrooms" placeholder="Bedrooms" class="form-control" value="${house.bedrooms}">
               </div>
               <div class="col-md-4 mb-2">
                 <label for="house-bathrooms">Bathroom</label>
-                <input minlength="0" maxlength="99" type="number" step=".5" name="bathrooms" id="house-bathrooms" placeholder="Bathrooms" class="form-control" value="${this.bathrooms}">
+                <input minlength="0" maxlength="99" type="number" step=".5" name="bathrooms" id="house-bathrooms" placeholder="Bathrooms" class="form-control" value="${house.bathrooms}">
               </div>
               <div class="col-md-4 mb-2">
                 <label for="house-Price">Price</label>
-                <input min="1" max="999999999" type="number" name="price" id="house-price" placeholder="Price" class="form-control" value="${this.price}" required>
+                <input min="1" max="999999999" type="number" name="price" id="house-price" placeholder="Price" class="form-control" value="${house.price}" required>
               </div>
               <div class="col-md-4 mb-2">
                 <label for="house-year">Year</label>
-                <input type="number" min="1886" max="2025" name="year" id="house-year" placeholder="Year" class="form-control" value="${this.year}" required>
+                <input type="number" min="1886" max="2025" name="year" id="house-year" placeholder="Year" class="form-control" value="${house.year}" required>
               </div>
               <div class="col-md-4 mb-2">
                 <label for="house-levels">Levels</label>
-                <input type="number" min="1" name="levels" id="house-levels" step="1" placeholder="Levels" class="form-control" value="${this.levels}" required>
+                <input type="number" min="1" name="levels" id="house-levels" step="1" placeholder="Levels" class="form-control" value="${house.levels}" required>
               </div>
               <!-- <div class="col-md-4 mb-2">
                 <label for="house-sqft">Square Feet</label>
@@ -141,11 +141,11 @@ export class House {
               </div> -->
               <div class="col-md-12 mb-2">
                 <label for="house-imgUrl">URL for picture</label>
-                <input type="text" name="imgUrl" id="house-imgUrl" placeholder="Image URL" class="form-control" value="${this.imgUrl}">
+                <input type="text" name="imgUrl" id="house-imgUrl" placeholder="Image URL" class="form-control" value="${house.imgUrl}">
               </div>
               <div class="col-12 mb-2">
                 <label for="house-description">Description</label>
-                <textarea name="description" id="house-description" placeholder="Description" class="form-control" rows="4">${this.description}</textarea>
+                <textarea name="description" id="house-description" placeholder="Description" class="form-control" rows="4">${house.description}</textarea>
               </div>
               <button type="submit" class="btn btn-primary mb-3 shadow rounded-pill">
                 Edit House
