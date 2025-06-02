@@ -49,7 +49,7 @@ export class House {
                     <p class="card-text"><small class="text-muted">Update On: ${this.updatedAt.toLocaleDateString()}</small></p>
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="card-text"><small class="text-muted">Levels: ${this.levels}</small></p>
-                        <p class="card-text"><small class="text-muted">Creator: ${this.creator.name}</small></p>
+                        <p class="card-text"><small class="text-muted">Creator: ${this.creator.name?.replace(/[\<\>]/g, '')}</small></p>
                     </div>
                     <button class="btn btn-danger" onclick="app.HouseController.deleteHouse('${this.id}')">Delete</button>
                     <button class="btn btn-primary" onclick="app.HouseController.setActiveHouse('${this.id}')">Edit</button>

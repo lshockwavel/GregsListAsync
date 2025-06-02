@@ -16,7 +16,7 @@ class HouseService {
   async getHouses() {
     const response = await api.get('api/houses');
     console.log('Houses from API:', response.data);
-    const houses = response.data.map(h => new House(h));
+    const houses = response.data.map(h => new House(h)).reverse();
     AppState.houses = houses; // Update the AppState with the fetched houses
     console.log(houses);
   }
